@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f6c4e2a883726f45b38e9991569cb63
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203754
+  packageName: ExcelConfigExporter - Export Excel data to C#/Json/Lua etc in Windows
+    and macOS
+  packageVersion: 1.0.0
+  assetPath: Assets/SnowwolfStudio/Plugins/EPPlus/lgpl-3.0.txt
+  uploadId: 467371

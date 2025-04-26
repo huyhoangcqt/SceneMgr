@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3da37c624415272429b2054b7f4e16aa
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203754
+  packageName: ExcelConfigExporter - Export Excel data to C#/Json/Lua etc in Windows
+    and macOS
+  packageVersion: 1.0.0
+  assetPath: Assets/SnowwolfStudio/SWExcelExporter/Docs/ExcelExporter Instructions.pdf
+  uploadId: 467371

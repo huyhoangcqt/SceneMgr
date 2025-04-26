@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cad1231e88a460b43a48ed537241c86b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203754
+  packageName: ExcelConfigExporter - Export Excel data to C#/Json/Lua etc in Windows
+    and macOS
+  packageVersion: 1.0.0
+  assetPath: Assets/SnowwolfStudio/SWExcelExporterTest/ExporterOutput/Lua/Lua/ExcelData/FormatDemo.lua
+  uploadId: 467371

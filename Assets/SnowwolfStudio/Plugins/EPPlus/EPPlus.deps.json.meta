@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 710c6083996470d469e39b044bf725a7
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203754
+  packageName: ExcelConfigExporter - Export Excel data to C#/Json/Lua etc in Windows
+    and macOS
+  packageVersion: 1.0.0
+  assetPath: Assets/SnowwolfStudio/Plugins/EPPlus/EPPlus.deps.json
+  uploadId: 467371

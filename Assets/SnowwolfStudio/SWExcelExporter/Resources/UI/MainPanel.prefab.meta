@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ecc50344669ea8d4783df0adfb5e6ade
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203754
+  packageName: ExcelConfigExporter - Export Excel data to C#/Json/Lua etc in Windows
+    and macOS
+  packageVersion: 1.0.0
+  assetPath: Assets/SnowwolfStudio/SWExcelExporter/Resources/UI/MainPanel.prefab
+  uploadId: 467371

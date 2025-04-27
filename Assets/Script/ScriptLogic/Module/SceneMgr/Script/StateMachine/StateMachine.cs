@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace YellowCat.SceneMgr
@@ -12,7 +13,8 @@ namespace YellowCat.SceneMgr
 
 		public StateMachine(Dictionary<T, BaseState> states, T startState)
 		{
-			mStates = new Dictionary<T, BaseState>(states);
+			this.mStates = new Dictionary<T, BaseState>();
+			this.mStates.AddRange(states);
 			this.mCrrKey = startState;
 
 			if (!states.ContainsKey(startState))
@@ -25,25 +27,23 @@ namespace YellowCat.SceneMgr
 			mCrrState?.Enter();
 		}
 
-		public void ChangeState(T state)
+		public bool ChangeState(T state)
 		{
 			if (!mStates.ContainsKey(state))
 			{
 				Debug.LogError($"The State: {state.ToString()} is not Registered!");
+				return false;
 			}
 			else
 			{
-				mCrrState?.Exit();
+				mCrrState.Exit();
 				mCrrKey = state;
 				mCrrState = mStates[mCrrKey];
-				mCrrState?.Enter();
+				mCrrState.Enter();
+				return true;
 			}
 		}
 	}
 
-	public abstract class BaseState
-	{
-		public virtual void Enter() { }
-		public virtual void Exit() { }
-	}
+
 }

@@ -14,15 +14,22 @@ public class SmartCoroutineLoader
 	private List<LoadingStep> steps = new List<LoadingStep>();
 	private int currentStepIndex = 0;
 
+	private IEnumerator _rootCoroutine;
+
+	public SmartCoroutineLoader(IEnumerator rootCoroutine)
+	{
+		_rootCoroutine = rootCoroutine;
+	}
+
 	// --- Public API ---
-	public IEnumerator RunCoroutine(IEnumerator rootCoroutine)
+	public IEnumerator RunCoroutine()
 	{
 		Debug.Log("[SmartCoroutineLoader] RunCoroutine start...");
 		IsDone = false;
 		steps.Clear();
 		currentStepIndex = 0;
 
-		yield return ExtractSteps(rootCoroutine);
+		yield return ExtractSteps(_rootCoroutine);
 
 		while (currentStepIndex < steps.Count)
 		{

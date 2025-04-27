@@ -45,7 +45,7 @@ public class LoadingSceneController : MonoBehaviour
 		if (loadable != null)
 		{
 			Debug.Log("Find Loader success!!");
-			SmartCoroutineLoader loadCoroutine = new SmartCoroutineLoader();
+			SmartCoroutineLoader loadCoroutine = new SmartCoroutine();
 			StartCoroutine(loadCoroutine.RunCoroutine(loadable.LoadAsync()));
 			while (!loadCoroutine.IsDone)
 			{

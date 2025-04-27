@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public enum SceneState
 {
 	Loading,
@@ -20,29 +21,43 @@ public class SceneName
 
 namespace YellowCat.SceneMgr
 {
-	public class SceneMgr : MonoBehaviour
+	public class SceneMgr : MonoSingletonTemplate<SceneMgr>
 	{
-		public static SceneMgr Instance { get; private set; }
+		public StateMachine<Scene> _stateMachine;
 
 		public AsyncOperation CurrentLoadingOperation { get; private set; }
 		private string crrSceneName = SceneName.GameMgrScene;
 		private string targetSceneName = SceneName.GameMgrScene;
 
-		private void Awake()
+		protected override void OnAwake()
 		{
-			if (Instance != null)
-			{
-				Destroy(gameObject);
-				return;
-			}
-			Instance = this;
 			DontDestroyOnLoad(this);
+			registerStates();
 		}
 
-		public void LoadScene(string sceneName)
+		private void registerStates()
 		{
-			StartCoroutine(LoadSceneRoutine(sceneName));
+			var states = new Dictionary<Scene, BaseState>()
+			{
+				{Scene.GameLauncher, new GameLauncherState() },
+				//{Scene.LoadingScene, new LoadingSceneState() },
+				{Scene.MainScene, new MainSceneState() },
+				{Scene.BattleScene, new BattleSceneState() },
+
+			};
+			_stateMachine = new StateMachine<Scene>(states, Scene.GameLauncher);
 		}
+
+		public void LoadScene(Scene scene)
+		{
+			_stateMachine.ChangeState(scene);
+		}
+
+
+		//public void LoadScene(string sceneName)
+		//{
+		//	StartCoroutine(LoadSceneRoutine(sceneName));
+		//}
 
 		private IEnumerator LoadSceneRoutine(string sceneName)
 		{

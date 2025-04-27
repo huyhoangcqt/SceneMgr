@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class OperationSequence
@@ -92,32 +89,71 @@ public class OperationSequence
         }
     }
 
-    public void Start()
+    public void AddTask(IEnumerator coroutine, string taskName)
+    {
+		if (isStart)
+		{
+			Debuger.Err("Can't add task once the Sequence has started!");
+			return;
+		}
+
+		TaskAsync taskAsync = new TaskAsync(new CoroutineStep(coroutine, taskName), taskName, coroutine.GetHashCode());
+		if (!tasks.ContainsKey(taskAsync.Id))
+		{
+			tasks.Add(taskAsync.Id, taskAsync);
+		}
+		else
+		{
+			Debuger.Err("The task: " + taskName + " was already Existed!");
+		}
+	}
+
+	public void AddTask(CoroutineSequence coroutineSeq, string taskName)
+	{
+		if (isStart)
+		{
+			Debuger.Err("Can't add task once the Sequence has started!");
+			return;
+		}
+
+		TaskAsync taskAsync = new TaskAsync(coroutineSeq, taskName, coroutineSeq.GetHashCode());
+		if (!tasks.ContainsKey(taskAsync.Id))
+		{
+			tasks.Add(taskAsync.Id, taskAsync);
+		}
+		else
+		{
+			Debuger.Err("The task: " + taskName + " was already Existed!");
+		}
+	}
+
+	public IEnumerator _IEStart()
     {
         if (isStart){
-            return;
+            yield break;
         }
         if (tasks == null || totalCount == 0)
         {
             isDone = true;
             isStart = false;
-            return;
+            yield break;
         }
         else {
             isStart = true;
             totalCount = tasks.Count;
             completedCount = 0;
-            CoroutineManager.startCoroutine(_StartSequence());
+            yield return _IEStartSequence();
         }
     }
 
-    IEnumerator _StartSequence()
+    IEnumerator _IEStartSequence()
     {
         var emunerator = tasks.GetEnumerator();
 
         while (emunerator.MoveNext()){
             var task = emunerator.Current;
             mCurrent = task.Value;
+            mCurrent._IERun();
 
             if (mCurrent != null){
                 while (!mCurrent.IsDone){
@@ -125,7 +161,7 @@ public class OperationSequence
                 }
 
                 completedCount++;
-                yield return _StartSequence();
+                yield return _IEStartSequence();
             }
         }
 

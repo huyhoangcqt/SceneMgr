@@ -17,16 +17,16 @@ public class ApplicationMgr : Singleton<ApplicationMgr>
 
     public void Start()
     {
-		SceneMgr.Instance.LoadScene("MainScene");
+		SceneMgr.Instance.LoadScene(Scene.MainScene);
 	}
 
     public void StartBatte()
 	{
-		SceneMgr.Instance.LoadScene("BattleScene");
+		SceneMgr.Instance.LoadScene(Scene.BattleScene);
 	}
 
     public void GoHome()
 	{
-		SceneMgr.Instance.LoadScene("MainScene");
+		SceneMgr.Instance.LoadScene(Scene.MainScene);
 	}
 }

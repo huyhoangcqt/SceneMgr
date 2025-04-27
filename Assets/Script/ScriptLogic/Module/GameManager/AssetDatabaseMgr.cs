@@ -45,7 +45,8 @@ public class AssetDatabaseMgr : Singleton<AssetDatabaseMgr>
     }
 
     public void LoadAllCharacters()
-    {        
+    {
+        Debug.Log("LoadAllCharacters");
         var charCfgs = Character.GetDict();
         var enumerator = charCfgs.GetEnumerator();
         while (enumerator.MoveNext()){
@@ -55,7 +56,11 @@ public class AssetDatabaseMgr : Singleton<AssetDatabaseMgr>
                 string path = GetCharacterPath(charPrefab);
                 if (!mCharacters.ContainsKey(path)){
                     AssetLoader.LoadAssetAsync<GameObject>(path, (go) => {
-                        mCharacters.Add(path, go);
+						
+                        if (!mCharacters.ContainsKey(path))
+						{
+						    mCharacters.Add(path, go);
+						}
                     });
                 }
             }
@@ -63,8 +68,9 @@ public class AssetDatabaseMgr : Singleton<AssetDatabaseMgr>
     }
 
     public void LoadAllMonster()
-    {
-        var monsterCfgs = Monster.GetDict();
+	{
+		Debug.Log("LoadAllMonster");
+		var monsterCfgs = Monster.GetDict();
         var enumerator = monsterCfgs.GetEnumerator();
         while (enumerator.MoveNext()){
             var monsterCfg = enumerator.Current.Value;
@@ -73,7 +79,12 @@ public class AssetDatabaseMgr : Singleton<AssetDatabaseMgr>
                 string path = GetMonsterPath(monsterPrefab);
                 if (!mMonsters.ContainsKey(path)){
                     AssetLoader.LoadAssetAsync<GameObject>(path, (go) => {
-                        mMonsters.Add(path, go);
+                        
+                        if (!mMonsters.ContainsKey(path))
+                        {
+                            mMonsters.Add(path, go);
+                        }
+
                     });
                 }
             }
@@ -126,6 +137,11 @@ public class AssetDatabaseMgr : Singleton<AssetDatabaseMgr>
     //NOTE Không nên xài loadAsync một cách tùy tiện, mà phải tùy từng thời điểm, xác định cụ thể trong game.
     //Ví dụ: Load assets cho MainScene khi bắt đầu.
     //Load assets cho BattleScene khi bắt đầu vào ải.
+
+    //27/04/2025:
+    //NOTE:
+    //Tuy nhiên, sử dụng LoadAsset ko đúng chỗ cũng ko được.
+    //Ví như function GetCharacter ở trên. được gọi khi spawn character trong map. Nhưng trước đó, chưa load character này lên. => Quá trình LoadAsset có thể trả về null vì chưa hoàn thành quá trình loading.
 }
 
 public class AssetLoader

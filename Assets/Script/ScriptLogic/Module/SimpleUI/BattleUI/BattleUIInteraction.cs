@@ -13,6 +13,6 @@ public class BattleUIInteraction : MonoBehaviour
     public void OnHomeButtonClicked()
     {
         Debug.Log("OnHomeButtonClicked!");
-        GameManager.Instance.GoHome();
+        ApplicationMgr.Instance.GoHome();
     }
 }

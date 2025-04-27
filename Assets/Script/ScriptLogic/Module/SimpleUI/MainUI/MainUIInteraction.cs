@@ -13,6 +13,6 @@ public class MainUIInteraction : MonoBehaviour
     public void OnPlayButtonClicked()
     {
         Debug.Log("OnPlayButtonClicked!");
-        GameManager.Instance.StartBatte();
+        ApplicationMgr.Instance.StartBatte();
     }
 }

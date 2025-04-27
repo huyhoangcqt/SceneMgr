@@ -19,7 +19,21 @@ public class GameLauncher : MonoBehaviour
          * 2. Sau khi tải tài nguyên thành công.
          * Tiến hành khởi tạo MainScene.
          * 3. Sau khi khởi tạo thành công => Start GameManager.
-        */ 
-       GameManager.Instance.Start();
+        */
+
+        StartCoroutine(Cr_StartGame());
+    }
+
+    private IEnumerator Cr_StartGame()
+    {
+        yield return Cr_LoadResource();
+        yield return null;
+        ApplicationMgr.Instance.Start();
+    }
+
+    private IEnumerator Cr_LoadResource()
+    {
+        yield return null;
+        //AssetDatabaseMgr.Instance.Initialize();
     }
 }

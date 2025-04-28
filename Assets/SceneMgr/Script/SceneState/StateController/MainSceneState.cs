@@ -37,13 +37,14 @@ namespace YellowCat.SceneMgr
 		private IEnumerator _IEPreLoadAssets()
 		{
 			Debug.Log("[MainSceneState] _IEPreLoadAssets!!");
-			yield return new WaitForSeconds(1f);
-			yield return null;
-			yield return null;
-			yield return null;
-			yield return new WaitForSeconds(1f);
 			yield return 0.1f;
-			yield return 0.1f;
+			yield return new WaitForSeconds(1f);
+			yield return 0.3f;
+			yield return null;
+			yield return null;
+			yield return null;
+			yield return new WaitForSeconds(1f);
+			yield return 0.5f;
 			yield return null;
 			yield return new WaitForSeconds(1f);
 			yield return null;
@@ -56,10 +57,10 @@ namespace YellowCat.SceneMgr
 			yield return null;
 			yield return null;
 			yield return new WaitForSeconds(2f);
-			yield return 0.2f;
-			yield return 0.1f;
+			yield return 0.5f;
 			yield return null;
 			yield return new WaitForSeconds(2f);
+			yield return 0.9f;
 			yield return null;
 		}
 		private IEnumerator _IELoadEnvironmentPackage()

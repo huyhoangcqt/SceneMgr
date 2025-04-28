@@ -19,7 +19,7 @@ namespace YellowCat.SceneMgr
 
 			if (!states.ContainsKey(startState))
 			{
-				Debug.LogError("Failed to Init default states: " + startState);
+				Debuger.Err("Failed to Init default states: " + startState);
 				return;
 			}
 
@@ -31,7 +31,7 @@ namespace YellowCat.SceneMgr
 		{
 			if (!mStates.ContainsKey(state))
 			{
-				Debug.LogError($"The State: {state.ToString()} is not Registered!");
+				Debuger.Err($"The State: {state.ToString()} is not Registered!");
 				return false;
 			}
 			else

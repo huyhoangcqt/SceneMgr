@@ -149,7 +149,7 @@ public class AssetLoader
     #region LoadAssetAsync
         private static IEnumerator _LoaAssetAsync<T>(string path, Action<T> completeCb) where T: UnityEngine.Object
         {
-            Debuger.Log("_LoadAsyncGameObject at path: " + path);
+            Debug.Log("_LoadAsyncGameObject at path: " + path);
             GameObject obj = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             AssetDatabase.TryGetGUIDAndLocalFileIdentifier(obj, out string guid, out long localId);
             AssetDatabaseLoadOperation op = AssetDatabase.LoadObjectAsync(path, localId);
@@ -171,7 +171,7 @@ public class AssetLoader
 
         public static void LoadAssetAsync<T>(string path, Action<T> completeCb) where T : UnityEngine.Object
         {
-            CoroutineManager.startCoroutine(_LoaAssetAsync(path, completeCb));
+            //CoroutineManager.startCoroutine(_LoaAssetAsync(path, completeCb));
 
             
             //NOTE trong lúc load async nên đẩy game state thành loadingstage, chạy loading UI và disable tất cả thao tác của người chơi.
@@ -192,7 +192,7 @@ public class AssetLoader
 
         // private static IEnumerator _UnLoaAssetAsync<T>(T asset, Action<T> completeCb) where T: UnityEngine.Object
         // {
-        //     Debuger.Log("_LoadAsyncGameObject at path: " + path);
+        //     Debug.Log("_LoadAsyncGameObject at path: " + path);
         //     GameObject obj = AssetDatabase.
         //     AssetDatabase.TryGetGUIDAndLocalFileIdentifier(obj, out string guid, out long localId);
         //     AssetDatabaseLoadOperation op = AssetDatabase.LoadObjectAsync(path, localId);

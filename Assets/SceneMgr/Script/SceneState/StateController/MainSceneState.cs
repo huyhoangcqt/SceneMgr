@@ -10,14 +10,14 @@ namespace YellowCat.SceneMgr
 
 		public override void Enter()
 		{
-			Debug.Log("[MainSceneState] Enter");
+			Debuger.Log("[MainSceneState] Enter");
 			CoroutineManager.Instance.StartCoroutine(_IELoadSceneRoutine(this.Scene.ToString()));
 		}
 
 		public override void MakeSequenceAsync()
 		{
 
-			Debug.Log("[MainSceneState] MakeSequenceAsync");
+			Debuger.Log("[MainSceneState] MakeSequenceAsync");
 			Sequence = new OperationSequence();
 
 			// Step 3: Load Target scene
@@ -30,13 +30,13 @@ namespace YellowCat.SceneMgr
 			Sequence.AddTask(_IECharacterPackages(), "Main Load Characters Package");
 
 
-			Debug.Log("[MainSceneState] MakeSequenceAsync Complete!!");
+			Debuger.Log("[MainSceneState] MakeSequenceAsync Complete!!");
 		}
 
 
 		private IEnumerator _IEPreLoadAssets()
 		{
-			Debug.Log("[MainSceneState] _IEPreLoadAssets!!");
+			Debuger.Log("[MainSceneState] _IEPreLoadAssets!!");
 			yield return 0.1f;
 			yield return new WaitForSeconds(1f);
 			yield return 0.3f;
@@ -51,7 +51,7 @@ namespace YellowCat.SceneMgr
 		}
 		private IEnumerator _IELoadStandardMaterials()
 		{
-			Debug.Log("[MainSceneState] _IELoadStandardMaterials!!");
+			Debuger.Log("[MainSceneState] _IELoadStandardMaterials!!");
 			yield return new WaitForSeconds(2f);
 			yield return 0.3f;
 			yield return null;
@@ -65,17 +65,17 @@ namespace YellowCat.SceneMgr
 		}
 		private IEnumerator _IELoadEnvironmentPackage()
 		{
-			Debug.Log("[MainSceneState] _IELoadEnvironmentPackage!!");
+			Debuger.Log("[MainSceneState] _IELoadEnvironmentPackage!!");
 			yield return new WaitForSeconds(1.2f);
 		}
 		private IEnumerator _IEMonsterPackage()
 		{
-			Debug.Log("[MainSceneState] _IEMonsterPackage!!");
+			Debuger.Log("[MainSceneState] _IEMonsterPackage!!");
 			yield return new WaitForSeconds(0.3f);
 		}
 		private IEnumerator _IECharacterPackages()
 		{
-			Debug.Log("[MainSceneState] _IECharacterPackages!!");
+			Debuger.Log("[MainSceneState] _IECharacterPackages!!");
 			yield return new WaitForSeconds(0.2f);
 		}
 	}

@@ -55,7 +55,7 @@ namespace YellowCat.SceneMgr
 
 		public void OnLoadComplete()
 		{
-			Debug.Log("On Scene Load Complete!!!");
+			Debuger.Log("On Scene Load Complete!!!");
 		}
 
 
@@ -64,7 +64,7 @@ namespace YellowCat.SceneMgr
 		/// </summary>
 		protected IEnumerator FindLoadingSceneController()
 		{
-			Debug.Log("[BaseState] FindLoadingSceneController!!");
+			Debuger.Log("[BaseState] FindLoadingSceneController!!");
 
 			int count = 0;
 			loadingSceneController = null;
@@ -101,27 +101,27 @@ namespace YellowCat.SceneMgr
 		protected IEnumerator _IERunSequenceAsync()
 		{
 
-			Debug.Log("[BaseState] _IERunSequenceAsync!!");
+			Debuger.Log("[BaseState] _IERunSequenceAsync!!");
 			if (Sequence != null)
 			{
-				Debug.Log("[BaseState] _IERunSequenceAsync Start !!");
+				Debuger.Log("[BaseState] _IERunSequenceAsync Start !!");
 
-				Debug.Log($"1. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+				Debuger.Log($"1. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
 				CoroutineManager.Instance.StartCoroutine(Sequence._IEStart());
 
-				Debug.Log($"2. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+				Debuger.Log($"2. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
 				while (!Sequence.IsDone)
 				{
-					Debug.Log($"3. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+					Debuger.Log($"3. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
 					UpdateProgress(Sequence.Progress, Sequence.TaskName, Sequence.TaskProgress);
 					yield return null;
 				}
-				Debug.Log("[BaseState] Sequence Run Complete!!");
+				Debuger.Log("[BaseState] Sequence Run Complete!!");
 			}
 			else
 			{
 				yield return null;
-				Debug.Log("[BaseState] Sequence Run Complete!!");
+				Debuger.Log("[BaseState] Sequence Run Complete!!");
 			}
 		}
 
@@ -139,7 +139,7 @@ namespace YellowCat.SceneMgr
 			Sequence.AddTask(_IECharacterPackages(), "Load Characters Package");
 
 
-			Debug.Log("[BaseState] MakeSequenceAsync Complete!!");
+			Debuger.Log("[BaseState] MakeSequenceAsync Complete!!");
 		}
 
 

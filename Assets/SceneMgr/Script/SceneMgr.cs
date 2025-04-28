@@ -22,7 +22,6 @@ namespace YellowCat.SceneMgr
 
 		public AsyncOperation CurrentLoadingOperation { get; private set; }
 		private string crrSceneName = Scene.GameLauncher.ToString();
-		private string targetSceneName = Scene.GameLauncher.ToString();
 
 		protected override void OnAwake()
 		{
@@ -45,28 +44,8 @@ namespace YellowCat.SceneMgr
 		public void LoadScene(Scene scene)
 		{
 			_stateMachine.ChangeState(scene);
-
-			//switch (scene)
-			//{
-			//	case Scene.GameLauncher:
-			//		break;
-			//	case Scene.MainScene:
-			//		//Run Step 1, 2, 3
-					
-			//		//Make Operation (Load newScene, LoadResource coroutine)
-			//		//Call to Start
-			//		//Send updateProgress Event each progress update
-					
-			//		//Call OnLoadingComplete
-			//		break;
-			//	case Scene.BattleScene:
-			//		break;
-			//}
 		}
 
-
-		//public IEnumerator LoadSceneRoutine(string sceneName)
-		//{
 		//	// Step 1: Load Transition Scene();
 		//	yield return _IELoadTransitionScene();
 
@@ -78,24 +57,13 @@ namespace YellowCat.SceneMgr
 
 		//	// Step 4: Running Oepration Sequence
 
-		//}
-
-
-		/// <summary>
-		/// Callback from Loading Scene State
-		/// </summary>
-		//public void OnLoadingComplete()
-		//{
 		//	// Step 5: Unload Transition Scene
-		//	_IEUnloadTransitionScene();
-		//}
 
 		public AsyncOperation LoadSceneAsync(string sceneName)
 		{
 			if (!SceneManager.GetSceneByName(sceneName).isLoaded)
 			{
 				Debug.Log($"[SceneMgr] _IELoadSceneAsync {sceneName}");
-				targetSceneName = sceneName;
 				crrSceneName = sceneName;
 				return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 			}
@@ -103,14 +71,12 @@ namespace YellowCat.SceneMgr
 		}
 
 
-		public IEnumerator _IELoadSceneAsync(string sceneName/*, bool isActive*/)
+		public IEnumerator _IELoadSceneAsync(string sceneName)
 		{
 			if (!SceneManager.GetSceneByName(sceneName).isLoaded)
 			{
 				Debug.Log($"[SceneMgr] _IELoadSceneAsync {sceneName}");
-				targetSceneName = sceneName;
 				CurrentLoadingOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-				//CurrentLoadingOperation.allowSceneActivation = isActive;
 				crrSceneName = sceneName;
 			}
 			yield return new WaitUntil( () => { return CurrentLoadingOperation.isDone;  });
@@ -138,13 +104,6 @@ namespace YellowCat.SceneMgr
 			}
 		}
 
-		private IEnumerator _IEUnloadScene(string sceneName)
-		{
-			if (SceneManager.GetSceneByName(sceneName).isLoaded)
-			{
-				yield return SceneManager.UnloadSceneAsync(sceneName);
-			}
-		}
 
 		public void UnloadCurrentScene()
 		{

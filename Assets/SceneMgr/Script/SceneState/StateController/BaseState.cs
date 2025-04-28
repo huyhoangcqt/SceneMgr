@@ -1,0 +1,167 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+
+namespace YellowCat.SceneMgr
+{
+	public class BaseState : IStateController, IState
+	{
+		protected Scene Scene;
+
+		public BaseState(Scene scene)
+		{
+			this.Scene = scene;
+		}
+
+		public virtual void Enter() { }
+		public virtual void Exit() { }
+
+		protected OperationSequence Sequence;
+
+		protected LoadingSceneController loadingSceneController;
+
+		//Loading scene
+		public IEnumerator _IELoadSceneRoutine(string sceneName)
+		{
+			// Step 1: Load Transition Scene();
+			yield return SceneMgr.Instance._IELoadTransitionScene();
+
+			// Step 2: Unload current Scene
+			SceneMgr.Instance.UnloadCurrentScene();
+
+			MakeSequenceAsync();
+
+			//Find LoadingSceneController / LoadingUIController
+			yield return FindLoadingSceneController();
+
+			//Step 3: Run Seq
+			yield return _IERunSequenceAsync();
+
+			//Step 4: Unload Transition Scene();
+			SceneMgr.Instance.UnloadTransitionScene();
+
+			yield return _IEDoComplete();
+		}
+
+		private IEnumerator _IEDoComplete()
+		{
+			yield return null;
+			OnLoadComplete();
+		}
+
+		public void OnLoadComplete()
+		{
+			Debug.Log("On Scene Load Complete!!!");
+		}
+
+
+		/// <summary>
+		/// Hàm này sẽ có một lỗi chí mạng khi tìm kiếm quá nhiều MonoBehaviour.
+		/// </summary>
+		protected IEnumerator FindLoadingSceneController()
+		{
+			Debug.Log("[BaseState] FindLoadingSceneController!!");
+
+			int count = 0;
+			loadingSceneController = null;
+
+			MonoBehaviour[] behaviours = GameObject.FindObjectsOfType<MonoBehaviour>(true);
+			var enumerator = ((IEnumerable)behaviours).GetEnumerator();
+			
+			while (loadingSceneController == null && enumerator.MoveNext())
+			{
+				count++;
+
+				var b = enumerator.Current as MonoBehaviour;
+				if (b is LoadingSceneController loadingCtrl)
+				{
+					loadingSceneController = loadingCtrl;
+					yield break;
+				}
+
+				if (count % 20 == 0)
+				{
+					yield return null;
+				}
+			}
+		}
+
+		protected void UpdateProgress(float progress, string taskName, float taskProgress)
+		{
+			if (loadingSceneController != null)
+			{
+				loadingSceneController.UpdateProgress(progress, taskName, taskProgress);
+			}
+		}
+
+		protected IEnumerator _IERunSequenceAsync()
+		{
+
+			Debug.Log("[BaseState] _IERunSequenceAsync!!");
+			if (Sequence != null)
+			{
+				Debug.Log("[BaseState] _IERunSequenceAsync Start !!");
+
+				Debug.Log($"1. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+				CoroutineManager.Instance.StartCoroutine(Sequence._IEStart());
+
+				Debug.Log($"2. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+				while (!Sequence.IsDone)
+				{
+					Debug.Log($"3. _IERunSequenceAsync > Sequence.IsDone: {Sequence.IsDone}");
+					UpdateProgress(Sequence.Progress, Sequence.TaskName, Sequence.TaskProgress);
+					yield return null;
+				}
+				Debug.Log("[BaseState] Sequence Run Complete!!");
+			}
+			else
+			{
+				yield return null;
+				Debug.Log("[BaseState] Sequence Run Complete!!");
+			}
+		}
+
+		public virtual void MakeSequenceAsync()
+		{
+			Sequence = new OperationSequence();
+			
+			// Step 3: Load Target scene
+			Sequence.AddTask(SceneMgr.Instance.LoadSceneAsync(Scene.ToString()), $"Load {Scene}");
+
+			Sequence.AddTask(_IEPreLoadAssets(), "Load standard Assets");
+			Sequence.AddTask(_IELoadStandardMaterials(), "Load Standard Materials");
+			Sequence.AddTask(_IELoadEnvironmentPackage(), "Load Environment Assets");
+			Sequence.AddTask(_IEMonsterPackage(), "Load Monsters Package");
+			Sequence.AddTask(_IECharacterPackages(), "Load Characters Package");
+
+
+			Debug.Log("[BaseState] MakeSequenceAsync Complete!!");
+		}
+
+
+		private IEnumerator _IEPreLoadAssets()
+		{
+			yield return new WaitForSeconds(1f);
+		}
+		private IEnumerator _IELoadStandardMaterials()
+		{
+			yield return new WaitForSeconds(2f);
+		}
+		private IEnumerator _IELoadEnvironmentPackage()
+		{
+			yield return new WaitForSeconds(1.2f);
+		}
+		private IEnumerator _IEMonsterPackage()
+		{
+			yield return new WaitForSeconds(0.3f);
+		}
+		private IEnumerator _IECharacterPackages()
+		{
+			yield return new WaitForSeconds(0.2f);
+		}
+	}
+}

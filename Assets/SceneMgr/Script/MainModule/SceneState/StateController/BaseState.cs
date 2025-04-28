@@ -44,18 +44,18 @@ namespace YellowCat.SceneMgr
 			//Step 4: Unload Transition Scene();
 			SceneMgr.Instance.UnloadTransitionScene();
 
-			yield return _IEDoComplete();
+			yield return _IEDoComplete(sceneName);
 		}
 
-		private IEnumerator _IEDoComplete()
+		private IEnumerator _IEDoComplete(string sceneName)
 		{
 			yield return null;
-			OnLoadComplete();
+			OnLoadComplete(sceneName);
 		}
 
-		public void OnLoadComplete()
+		public void OnLoadComplete(string sceneName)
 		{
-			Debuger.Log("On Scene Load Complete!!!");
+			Debug.Log($"On {sceneName} Load Complete!!!");
 		}
 
 

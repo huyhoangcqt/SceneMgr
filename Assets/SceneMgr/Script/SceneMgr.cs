@@ -63,7 +63,7 @@ namespace YellowCat.SceneMgr
 		{
 			if (!SceneManager.GetSceneByName(sceneName).isLoaded)
 			{
-				Debug.Log($"[SceneMgr] _IELoadSceneAsync {sceneName}");
+				Debug.Log($"[SceneMgr] LoadSceneAsync {sceneName}");
 				crrSceneName = sceneName;
 				return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 			}

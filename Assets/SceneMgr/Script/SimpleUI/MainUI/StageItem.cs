@@ -25,7 +25,7 @@ public class StageItem : ListViewItem
 
     protected override void OnItemClicked()
     {
-        Debug.Log("StateItem: " + stageData.Name + " clicked!");
+        //Debug.Log("StateItem: " + stageData.Name + " clicked!");
         active_outline.gameObject.SetActive(true);
         UICacheData.selectedStage = stageData.Key;
     }

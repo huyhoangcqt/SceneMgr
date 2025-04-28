@@ -9,6 +9,6 @@ namespace YellowCat.SceneMgr
 
 		public void MakeSequenceAsync();
 
-		public void OnLoadComplete();
+		public void OnLoadComplete(string sceneName);
 	}
 }

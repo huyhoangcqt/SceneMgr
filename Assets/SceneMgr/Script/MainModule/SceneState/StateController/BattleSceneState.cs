@@ -46,22 +46,60 @@ namespace YellowCat.SceneMgr
 		private IEnumerator _IEPreLoadAssets()
 		{
 			yield return new WaitForSeconds(1f);
+			yield return 0.3f;
 			yield return new WaitForSeconds(1f);
-			yield return new WaitForSeconds(1f);
+			yield return 0.6f;
+
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.6f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.7f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.8f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.9f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.92f;
 		}
 		private IEnumerator _IELoadStandardMaterials()
 		{
-			yield return new WaitForSeconds(2f);
-			yield return new WaitForSeconds(2f);
-			yield return new WaitForSeconds(2f);
-			yield return new WaitForSeconds(2f);
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.2f;
+			yield return new WaitForSeconds(0.2f);
+			yield return 0.3f;
+			yield return new WaitForSeconds(0.2f);
+			yield return 0.5f;
+
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.6f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.7f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.8f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.9f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.92f;
 		}
 		private IEnumerator _IELoadEnvironmentPackage()
 		{
-			yield return new WaitForSeconds(1.2f);
-			yield return new WaitForSeconds(1.2f);
-			yield return new WaitForSeconds(1.2f);
-			yield return new WaitForSeconds(1.2f);
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.2f;
+			yield return new WaitForSeconds(0.2f);
+			yield return 0.3f;
+			yield return new WaitForSeconds(0.2f);
+			yield return 0.5f;
+
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.6f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.7f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.8f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.9f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.92f;
 		}
 		private IEnumerator _IEMonsterPackage()
 		{

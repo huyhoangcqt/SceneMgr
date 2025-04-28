@@ -12,7 +12,7 @@ public class MainUIInteraction : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        Debug.Log("OnPlayButtonClicked!");
+        //Debug.Log("OnPlayButtonClicked!");
         ApplicationMgr.Instance.StartBatte();
     }
 }

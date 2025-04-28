@@ -1,6 +1,10 @@
 SceneMgr
+[verion 0.0.1]
+[Unity 2023.2.3f1]
 
 Features:
+- Scene Manager And Loader System.
+- Preload assets before start the scene.
 
 Setup:
 1. Kéo các scene vào build setting.

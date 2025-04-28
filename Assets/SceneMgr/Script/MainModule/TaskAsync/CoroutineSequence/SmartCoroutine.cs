@@ -86,7 +86,7 @@ namespace YellowCat.SceneMgr
 				}
 			}
 
-			Progress = 0.9f;
+			Progress = 0.99f;
 			yield return null;
 			yield return null;
 			yield return null;

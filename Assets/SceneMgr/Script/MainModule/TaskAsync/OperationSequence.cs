@@ -70,7 +70,12 @@ namespace YellowCat.SceneMgr
 
             float eachTaskPercent = 1f / TaskCount;
             float crrTaskProgress = mCurrent == null ? 0f : (float)mCurrent.Progress;
-            return ((float)completedCount / TaskCount) + crrTaskProgress * eachTaskPercent;
+            float progress =  ((float)completedCount / TaskCount) + crrTaskProgress * eachTaskPercent;
+            if (progress > 0.9f && !isDone)
+            {
+                return 0.9f;
+            }
+            return progress;
         }
 
         private float GetTaskProgress()
@@ -181,7 +186,8 @@ namespace YellowCat.SceneMgr
             if (tasks == null || TaskCount == 0)
             {
                 Debuger.Err("[OperationSequence] The sequence has NO Task!!");
-                isDone = true;
+				yield return new WaitForSeconds(0.5f);
+				isDone = true;
                 isStart = false;
                 Debuger.Err("[OperationSequence] The sequence has Stopped!!");
                 yield break;
@@ -195,9 +201,10 @@ namespace YellowCat.SceneMgr
 
                 yield return _IEStartSequence();
 
-                isDone = true;
-                isStart = false;
-                Debuger.Log("[OperationSequence] The sequence has Complete");
+				yield return new WaitForSeconds(0.5f);
+				isDone = true;
+				isStart = false;
+				Debuger.Log("[OperationSequence] The sequence has Complete");
             }
         }
 
@@ -219,13 +226,11 @@ namespace YellowCat.SceneMgr
                     }
                 }
 
-                completedCount++;
+				yield return null;
+				yield return null;
+				yield return null;
+				completedCount++;
             }
-
-            yield return null;
-            isDone = true;
-            isStart = false;
-            Debuger.Log("[OperationSequence] Sequence Done");
         }
     }
 }

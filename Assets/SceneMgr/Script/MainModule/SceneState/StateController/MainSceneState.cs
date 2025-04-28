@@ -7,6 +7,7 @@ namespace YellowCat.SceneMgr
 	public class MainSceneState : BaseState
 	{
 		public MainSceneState(Scene scene) : base(scene) { }
+		private bool isFirstTime = false;
 
 		public override void Enter()
 		{
@@ -23,11 +24,21 @@ namespace YellowCat.SceneMgr
 			// Step 3: Load Target scene
 			Sequence.AddTask(SceneMgr.Instance.LoadSceneAsync(Scene.ToString()), $"Load {Scene}");
 
-			Sequence.AddTask(_IEPreLoadAssets(), "Main Load standard Assets");
-			Sequence.AddTask(_IELoadStandardMaterials(), "Main Load Standard Materials");
-			Sequence.AddTask(_IELoadEnvironmentPackage(), "Main Load Environment Assets");
-			Sequence.AddTask(_IEMonsterPackage(), "Main Load Monsters Package");
-			Sequence.AddTask(_IECharacterPackages(), "Main Load Characters Package");
+			if (isFirstTime )
+			{
+				isFirstTime = true;
+				Sequence.AddTask(_IEPreLoadAssets(), "Main Load standard Assets");
+				Sequence.AddTask(_IELoadStandardMaterials(), "Main Load Standard Materials");
+				Sequence.AddTask(_IELoadEnvironmentPackage(), "Main Load Environment Assets");
+				Sequence.AddTask(_IEMonsterPackage(), "Main Load Monsters Package");
+				Sequence.AddTask(_IECharacterPackages(), "Main Load Characters Package");
+			}
+			else
+			{
+				Sequence.AddTask(_IELoadEnvironmentPackage(), "Main Load Environment Assets");
+				Sequence.AddTask(_IEMonsterPackage(), "Main Load Monsters Package");
+				Sequence.AddTask(_IECharacterPackages(), "Main Load Characters Package");
+			}
 
 
 			Debuger.Log("[MainSceneState] MakeSequenceAsync Complete!!");
@@ -66,17 +77,26 @@ namespace YellowCat.SceneMgr
 		private IEnumerator _IELoadEnvironmentPackage()
 		{
 			Debuger.Log("[MainSceneState] _IELoadEnvironmentPackage!!");
-			yield return new WaitForSeconds(1.2f);
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.2f;
+			yield return new WaitForSeconds(0.2f);
+			yield return 0.5f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.9f;
 		}
 		private IEnumerator _IEMonsterPackage()
 		{
 			Debuger.Log("[MainSceneState] _IEMonsterPackage!!");
-			yield return new WaitForSeconds(0.3f);
+			yield return 0.1f;
+			yield return new WaitForSeconds(0.1f);
+			yield return 0.9f;
 		}
 		private IEnumerator _IECharacterPackages()
 		{
 			Debuger.Log("[MainSceneState] _IECharacterPackages!!");
+			yield return 0.1f;
 			yield return new WaitForSeconds(0.2f);
+			yield return 0.9f;
 		}
 	}
 }

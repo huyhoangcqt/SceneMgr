@@ -1,31 +1,29 @@
-using Unity.VisualScripting;
-using UnityEngine;
 using YellowCat.SceneMgr;
 
 public enum GameState
 {
-    Main,
-    Battle,
+	Main,
+	Battle,
 }
 
 public class ApplicationMgr : Singleton<ApplicationMgr>
 {
-    public ApplicationMgr() : base ()
-    {
-    }
+	public ApplicationMgr() : base()
+	{
+	}
 
 
-    public void Start()
-    {
+	public void Start()
+	{
 		SceneMgr.Instance.LoadScene(Scene.MainScene);
 	}
 
-    public void StartBatte()
+	public void StartBatte()
 	{
 		SceneMgr.Instance.LoadScene(Scene.BattleScene);
 	}
 
-    public void GoHome()
+	public void GoHome()
 	{
 		SceneMgr.Instance.LoadScene(Scene.MainScene);
 	}

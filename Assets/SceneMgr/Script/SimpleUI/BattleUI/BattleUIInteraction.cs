@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using YellowCat.SceneMgr;
+
 using UnityEngine;
 
 public class BattleUIInteraction : MonoBehaviour

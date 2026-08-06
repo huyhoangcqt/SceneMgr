@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -29,11 +27,7 @@ public class MainUICtrl : MonoBehaviour
 
     public void InitChapterView(ChapterData cData)
     {
-        List<ItemListData> stageDatas = new List<ItemListData>();
-        foreach (var stageData in cData.stages){
-            stageDatas.Add(new StageItemData(stageData));
-        }
         stageViewCtrl = new DynamicListView<StageItem>(stageView);
-        stageViewCtrl.InitView(stageDatas);
+        stageViewCtrl.InitView(cData.stages);
     }
 }

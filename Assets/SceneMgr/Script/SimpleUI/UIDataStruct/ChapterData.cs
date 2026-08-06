@@ -1,21 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
-using ExcelData;
 
 public class ChapterData
 {
-    Chapter.Item config;
-    public List<Stage.Item> stages;
+    public const int STAGE_COUNT = 20;
+    public List<StageItemData> stages;
 
     public ChapterData(string key)
     {
-        config = Chapter.GetItem(key);
-        stages = new List<Stage.Item>();
-        foreach (var entry in Stage.GetDict()){
-            var stageCfg = entry.Value;
-            if (stageCfg.chapter == key){
-                stages.Add(stageCfg);
-            }
+        stages = new List<StageItemData>();
+        for (int i = 1; i <= STAGE_COUNT; i++)
+        {
+            stages.Add(new StageItemData(i));
         }
     }
 }

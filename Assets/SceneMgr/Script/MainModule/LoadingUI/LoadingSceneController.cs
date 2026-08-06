@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using YellowCat.SceneMgr;
 
 public class LoadingSceneController : MonoBehaviour
 {
 	[SerializeField] private Slider _totalProgressBar;
-	[SerializeField] private TMPro.TextMeshProUGUI _totalProgress;
+	[SerializeField] private Text _totalProgress;
 
 	[SerializeField] private Slider _taskProgressBar;
-	[SerializeField] private TMPro.TextMeshProUGUI _taskProgress;
-	[SerializeField] private TMPro.TextMeshProUGUI _taskName;
+	[SerializeField] private Text _taskProgress;
+	[SerializeField] private Text _taskName;
 
 	public void UpdateProgress(float progress, string taskName, float taskProgress)
 	{

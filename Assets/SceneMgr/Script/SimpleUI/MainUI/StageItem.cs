@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +5,7 @@ using UnityEngine.UI;
 public class StageItem : ListViewItem
 {
     StageItemData stageData;
-    private UnityEngine.UI.Text mButtonLabel;
+    private Text mButtonLabel;
     private Transform active_outline;
 
     protected override void OnInitView()
@@ -16,7 +14,7 @@ public class StageItem : ListViewItem
         active_outline.gameObject.SetActive(false);
 
         stageData = mData as StageItemData;
-        mButtonLabel = mObjView.transform.Find("text").GetComponent<UnityEngine.UI.Text>();
+        mButtonLabel = mObjView.transform.Find("text").GetComponent<Text>();
         mButtonLabel.text = stageData.Name;
         mObjView.name = stageData.Name;
 

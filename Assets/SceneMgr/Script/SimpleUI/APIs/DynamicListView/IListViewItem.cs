@@ -21,7 +21,7 @@ public class ListViewItem : IListViewItem
 {
     protected GameObject mObjView;
     private Button mButton;
-    protected ItemListData mData;
+    protected IItemListData mData;
     protected Action<ListViewItem> mItemSeletectedCallback;
     private bool mIsInitialzied;
 
@@ -30,7 +30,7 @@ public class ListViewItem : IListViewItem
         mIsInitialzied = false;
     }
 
-    public void InitView(GameObject objView, ItemListData data, Action<ListViewItem> itemSeletectedCallback)
+    public void InitView(GameObject objView, IItemListData data, Action<ListViewItem> itemSeletectedCallback)
     {        
         if (mIsInitialzied){ return; }
         mIsInitialzied = true;

@@ -36,7 +36,7 @@ public class DynamicListView<T> where T : ListViewItem, new()
 		mPoolCount = itemPool.Count;
 	}
 
-	public void InitView(List<ItemListData> mDatas)
+	public void InitView(IReadOnlyList<IItemListData> mDatas)
 	{
 		mCount = mDatas.Count;
 		//Init Pool

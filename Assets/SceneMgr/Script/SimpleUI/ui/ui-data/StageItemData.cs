@@ -1,5 +1,3 @@
-using ExcelData;
-
 public class StageItemData : ItemListData
 {    
     public int id;

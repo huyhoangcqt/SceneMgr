@@ -2,21 +2,19 @@ using ExcelData;
 
 public class StageItemData : ItemListData
 {    
-    private Stage.Item config;
-    public StageItemData(Stage.Item cfg)
+    public int id;
+    public StageItemData(int id)
     {
-        this.config = cfg;
+        this.id =id;
     }
     
-    public string Name{
-        get { 
-            return this.config.name;
-        }
+    public string Name
+    {
+        get { return $"Stage {id}";}
     }
 
-    public string Key{
-        get {
-            return this.config.key;
-        }
+    public string Key
+    {
+        get { return $"{id}"; }
     }
 }

@@ -49,3 +49,12 @@ Dependencies:
 Chưa test tính năng: (Vietnamese)
 - 1.Lồng Operation Sequence bên trong một Operation Sequence khác.
 - 2.Bên trong coroutine: chỉ mới test với yield return float, yield return new WaitForSeconds(), chưa test với các tính năng khác.
+
+
+
+
+[verion 0.0.2] Clean Project
+[Unity 2022.3.50f1]
+- Remove unused resources
+- Remove unused packages
+- Remove TextMeshPro
